@@ -6,7 +6,7 @@
     </div>
     <form class="Payment-form" @submit="onPayment">
       <input type="text" v-model.number="coin">
-      <button>pay</button>
+      <button class="Button Button--small Payment-button">pay</button>
     </form>
   </div>
 </template>
@@ -39,6 +39,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../styles/settings';
+
 .Payment {
   display: flex;
   justify-content: space-around;
@@ -46,7 +48,7 @@ export default {
   border-radius: 500rem;
   align-items: center;
   padding: 20px 0;
-  background-color: rgb(175, 175, 175);
+  background-color: $primary-color;
   flex-wrap: wrap;
 
   &-content {
@@ -55,8 +57,17 @@ export default {
     justify-content: space-around;
   }
 
+  &-item {
+    color: $white;
+  }
+
   &-form {
     width: calc(50% - 20px);
+  }
+
+  &-button {
+    background-color: $white;
+    color: $primary-color;
   }
 }
 </style>

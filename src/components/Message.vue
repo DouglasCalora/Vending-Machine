@@ -2,6 +2,7 @@
   <div class="Message" :class="messageStyle">
     <h2 class="Message-title">{{ messageTitle }}</h2>
     <p class="Message-description">{{ messageDescription }}</p>
+    <slot></slot>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ export default {
   }
 
   &-title {
+    text-align: center;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 5px;
@@ -40,6 +42,7 @@ export default {
   }
 
   &-description {
+    text-align: center;
     font-weight: bold;
     text-transform: uppercase;
     color: white

@@ -11,8 +11,10 @@ export default {
 </script> 
 
 <style lang="scss">
+@import '../styles/settings';
+
 .Button {
-  background-color: blue;
+  background-color: $primary-color;;
   border: 0;
   color: white;
   cursor: pointer;
@@ -24,15 +26,15 @@ export default {
   text-align: center;
   text-decoration: none;
   transition: background-color 250ms;
-  border-radius: 500rem;
+  border-radius: 10px;
 
   &:not(.Form-button, &--smal) {
     padding: 0.75em 1.25em;
-    text-transform: uppercase
   }
 
   &--small {
-    padding: 0.5em 1em;
+    padding: 5px 10px;
+    font-size: 10px;
   }
 }
 </style>

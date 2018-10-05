@@ -1,15 +1,13 @@
 <template>
-	<!-- <div class="Product"> -->
-			<div class="Product-content">
-				<figure class="Product-figure">
-					<img :src="src" :alt="name" class="Product-image">
-				</figure>
-				<span class="Product-name" id="coca">{{ name }}</span>
-				<span class="Product-value">Valor: {{ price }}</span>
-				<span class="Product-code">Codigo: {{ code }}</span>
-				<slot></slot>
-			</div>
-		<!-- </div> -->
+	<div class="Product-content">
+		<figure class="Product-figure">
+			<img :src="src" :alt="name" class="Product-image">
+		</figure>
+		<span class="Product-name" id="coca">{{ name }}</span>
+		<span class="Product-value">Valor: {{ price }}</span>
+		<span class="Product-code">Codigo: {{ code }}</span>
+		<slot></slot>
+	</div>
 </template>
 
 <script>
@@ -36,16 +34,27 @@ export default {
 			type: String,
 			default: ''
 		}
+	},
+
+	methods: {
+		resolveImage(src) {
+			console.log(require(src))
+			return require(src)
+		}
 	}
 }
 
 </script>
 
 <style lang="scss">
+@import '../styles/settings';
+
 .Product {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
+	padding-bottom: 50px;
+	border-bottom: 2px dotted;
 
 	&--alignMiddle {
 		justify-content: center;
@@ -55,7 +64,7 @@ export default {
 	&-title {
 		width: 100%;
 		text-align: center;
-		color: blue;
+		color: $primary-color;;
 	}
 
 	&-content {
@@ -104,5 +113,3 @@ export default {
 	}
 }
 </style>
-
-

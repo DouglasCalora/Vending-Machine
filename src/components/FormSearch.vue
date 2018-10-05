@@ -35,15 +35,17 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../styles/settings';
+
 .Form {
   $root: &;
 
-  margin: 30px 0;
+  margin: 50px 0;
 
   &--search {
     text-align: center;
     font-size: 20px;
-    color: blue;
+    color: $primary-color;;
 
     #{$root}-text {
       max-width: 400px;
@@ -81,13 +83,13 @@ export default {
     outline: 0;
     width: 100%;
     margin: 0 auto;
-    padding: 5px;
+    padding: 10px;
     border-radius: 3px;
     border: 1px solid rgb(59, 57, 57);
     transition: border 500ms;
 
     &:focus {
-      border-color: blue;
+      border-color: $primary-color;;
     }
   }
 

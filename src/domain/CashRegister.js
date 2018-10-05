@@ -9,9 +9,11 @@ export default class CashRegister {
     this.infos = {
       totalPayd: '',
       charge: 0,
+      memorizeCharge: '',
       isValidityCoin: true,
       faildBuy: false,
-      finished: false
+      finished: false,
+      finishedCharge: false
     }
     this._coinsInRegister = {
       5: 5,
@@ -33,12 +35,13 @@ export default class CashRegister {
 
   addCoin(value) {
     if (!this._coinsInRegister.hasOwnProperty(value)) {
-      alert('Digite uma moeda valida')
+      this.infos.totalPayd = this._alreadyPayd
+      
       return this.infos.isValidityCoin = false
     }
     
     if (this._complete) {
-      return console.log(`A moeda de <strong>R$${this.money(value)}</strong> será devolvida.`)
+      return this.infos.faildBuy = true;
     }
     
     this._alreadyPayd += value
@@ -55,10 +58,11 @@ export default class CashRegister {
     let charge = this._totalPrice - this._alreadyPayd
 
     if (charge < 0) {
-      // this.infos.wait = 'link', 'Aguarde, estamos calculando o seu troco...'
+      
     } else if (charge === 0) {
       this.infos.finished = true
       this.infos.charge = 0
+
       return this.reset()
     } else {
       return this.infos.charge = charge
@@ -89,25 +93,16 @@ export default class CashRegister {
       }
     }
     
+    this.infos.charge = chargeCoins
+    this.infos.memorizeCharge = memorizeCharge
     
     if (charge > 0) {
-      console.log('danger', 'Infelizmente não temos troco suficiente para completar esta transação. Estamos devolvendo o seu dinheiro.')
       this.infos.faildBuy = true
+
       return this.reset()
     }
-    
-    let message = []
-    
-    for (let coin in chargeCoins) {
-      console.log(coin)
-      message.push(` <strong>${chargeCoins[coin]}</strong> moeda(s) de <strong>R$${this.money(coin)}</strong>`)
-    }
 
-    this.infos.finished = true
-
-    console.log(chargeCoins)
-    
-    console.log(`O seu troco é de <strong>R$${this.money(memorizeCharge)}</strong>. Você está recebendo ${message.join(',')}.`)
+    this.infos.finishedCharge = true
 
     this.reset()
   }
@@ -115,10 +110,5 @@ export default class CashRegister {
   reset() {
     this._complete = true
     this._alreadyPayd = 0
-  }
-
-  money(input) {
-    let output = (input / 100).toFixed(2)
-    return output.replace('.', ',')
   }
 }
