@@ -22,6 +22,7 @@ export default {
   border: 2px solid transparent;
   border-radius: 5px;
   padding: 30px;
+  margin: 20px 0;
 
   &--danger {
     background-color: rgba(255, 0, 0, 0.479);

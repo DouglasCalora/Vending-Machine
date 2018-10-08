@@ -3,25 +3,10 @@ export default class CashRegister {
     this._totalPrice = 0
     this._alreadyPayd = 0
     this.total = 0
-    this.isValidityCoin = true
+    this._coin = 0
     this._complete = false
-    this.coin = 0
-    this.infos = {
-      totalPayd: '',
-      charge: 0,
-      memorizeCharge: '',
-      isValidityCoin: true,
-      faildBuy: false,
-      finished: false,
-      finishedCharge: false
-    }
-    this._coinsInRegister = {
-      5: 5,
-      10: 10,
-      25: 1,
-      50: 1,
-      100: 5
-    }
+    this._coinsInRegister = { 5: 5, 10: 10, 25: 1, 50: 1, 100: 5 }
+    this.infos = { totalPayd: '', charge: 0, memorizeCharge: '', faildBuy: false, finished: false, finishedCharge: false }
   }
 
   getTotalPrice(totalPrice) {
@@ -30,27 +15,25 @@ export default class CashRegister {
 
   getCoin(coin) {
     this._coin = coin
+
     return this.addCoin(this._coin)
   }
 
   addCoin(value) {
     if (!this._coinsInRegister.hasOwnProperty(value)) {
-      this.infos.totalPayd = this._alreadyPayd
-      
-      return this.infos.isValidityCoin = false
+      value = 0
+      alert('Digite uma moeda valida')
     }
-    
+
     if (this._complete) {
       return this.infos.faildBuy = true;
     }
-    
+
     this._alreadyPayd += value
     this._coinsInRegister[value]++
     this.infos.totalPayd = this._alreadyPayd
-    this.infos.isValidityCoin = true
-
     this.chargeBack()
-  
+
     return this.infos
   }
 
@@ -58,7 +41,7 @@ export default class CashRegister {
     let charge = this._totalPrice - this._alreadyPayd
 
     if (charge < 0) {
-      
+
     } else if (charge === 0) {
       this.infos.finished = true
       this.infos.charge = 0
@@ -71,17 +54,16 @@ export default class CashRegister {
     //Calcular troco
     charge = Math.abs(charge)
     const memorizeCharge = charge
-    
+
     let chargeCoins = {}
     let coinsEntries = Object.entries(this._coinsInRegister)
     let coinsLength = coinsEntries.length
-    
+
     for (let count = coinsLength - 1; count >= 0; count--) {
       let value = coinsEntries[count][0]
       let quantity = coinsEntries[count][1]
-      
       let needed = parseInt(charge / value)
-      
+
       if (needed >= 1 && quantity >= 1) {
         if (quantity < needed) {
           charge -= value * quantity
@@ -92,10 +74,10 @@ export default class CashRegister {
         }
       }
     }
-    
+
     this.infos.charge = chargeCoins
     this.infos.memorizeCharge = memorizeCharge
-    
+
     if (charge > 0) {
       this.infos.faildBuy = true
 
@@ -103,7 +85,6 @@ export default class CashRegister {
     }
 
     this.infos.finishedCharge = true
-
     this.reset()
   }
 

@@ -38,7 +38,6 @@ export default {
 
 	methods: {
 		resolveImage(src) {
-			console.log(require(src))
 			return require(src)
 		}
 	}
@@ -48,6 +47,15 @@ export default {
 
 <style lang="scss">
 @import '../styles/settings';
+
+
+@media (max-width: 760px) {
+	.Product {
+		&-content {
+			width: calc(50% - 15px);
+		}
+	}
+}
 
 .Product {
 	display: flex;
@@ -68,7 +76,7 @@ export default {
 	}
 
 	&-content {
-		width: calc(25% - 10px);
+		width: calc(25% - 10px);	
 		margin-bottom: 10px;
 	}
 
@@ -83,6 +91,11 @@ export default {
 		display: block;
 		text-align: center;
 		margin-top: 10px;
+		color: $primary-color;
+	}
+
+	&-name {
+		font-weight: bold;
 	}
 
 	&-value, 
@@ -100,16 +113,17 @@ export default {
 		text-align: center;
 	}
 
-	@media screen and (max-width: 760px) {
-		&-content {
-			width: calc(50% - 15px);
-		}
-	}
+	// @media (max-width: 760px) {
+	// 	&-content {
+	// 		width: calc(50% - 15px);
+	// 	}
+	// }
 
-	@media screen and (max-width: 420px) {
-		&-content {
-			width: calc(100%);
-		}
-	}
+	// @media (max-width: 420px) {
+	// 	&-content {
+	// 		width: calc(100%);
+	// 	}
+	// }
 }
+
 </style>

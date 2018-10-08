@@ -6,7 +6,6 @@
         <product v-for="product in products" :src="product.src" :name="product.name" :price="product.price" :code="product.code"></product>
       </div>
     </container>
-    
     <container>
       <form-search @searched="getTerm"></form-search>
       <coin></coin>
@@ -17,7 +16,7 @@
             </product>
             <div class="Section-actions">
               <button class="Button"  @click="addedProduct(searchedProduct.product)" 
-              v-show="!outOfStock && !cashInfos.finished && !cashInfos.finishedCharge">add</button>
+              v-show="!outOfStock && !cashInfos.finished && !cashInfos.finishedCharge && alreadyPayd === 0">add</button>
             </div>
           </div>
         </div>
@@ -27,25 +26,17 @@
       </div>
       
       <div>
-      <message v-if="cashInfos.finished && !cashInfos.finishedCharge" messageStyle="Message--success" messageTitle="AEEE"
+      <message v-if="cashInfos.finished && !cashInfos.finishedCharge" messageStyle="Message--success" messageTitle="Tudo Certo!"
       messageDescription="compra realizada com sucesso"></message>  
 
       <message v-if="cashInfos.faildBuy" messageStyle="Message--danger" :messageTitle="messages.errorTitle" :messageDescription="messages.faild"></message> 
        
-      <pay v-if="totalPrice > 0 && !cashInfos.finished && !cashInfos.faildBuy" :totalPrice="totalPrice" @payd="getCoin" :alreadyPayd="alreadyPayd"></pay> 
+      <pay v-if="totalPrice > 0 && !cashInfos.finished && !cashInfos.faildBuy && totalPrice >= alreadyPayd" :totalPrice="totalPrice" @payd="getCoin" :alreadyPayd="alreadyPayd"></pay> 
 
-      <message v-if="cashInfos.finishedCharge" messageStyle="Message--success" messageTitle="AEEE" 
+      <message v-if="cashInfos.finishedCharge" messageStyle="Message--success" messageTitle="Tudo Certo!" 
       :messageDescription="chargeBack(cashInfos.charge, cashInfos.memorizeCharge)"></message>
       </div>
     </container>
-
-    <modal name="error-message">
-      <div class="Modal">
-        <h2 class="Modal-title">Insira uma moeda valida</h2>
-      </div>
-    </modal>
-
-    <img src="./assets/antartic.jpg" alt="">
   </div>
 </template>
 
@@ -71,7 +62,6 @@ export default {
 
   data () {
     return {
-      addButton: true,
       title: 'Nossos Produtos',
       totalPrice: 0,
       outOfStock: false,
@@ -104,8 +94,9 @@ export default {
     
     searchedProduct() {
       this.outOfStock = productMachine.getProduct(this.term).outOfStock
+  
       return productMachine.getProduct(this.term)
-    },
+    }
   },
 
   methods: {
@@ -117,11 +108,6 @@ export default {
       this.coin = coin
       this.cashInfos = cashRegister.getCoin(this.coin)
       this.alreadyPayd = this.cashInfos.totalPayd
-
-      if (!this.cashInfos.isValidityCoin) {
-        this.show()
-      }
-
     },
 
     addedProduct(product) {
@@ -131,7 +117,6 @@ export default {
       this.outOfStock = added.outOfStock
 
       cashRegister.getTotalPrice(this.totalPrice)
-      this.showAddButton()
     },
 
     chargeBack(charge, memorizeCharge) {
@@ -148,22 +133,6 @@ export default {
       let output = (input / 100).toFixed(2)
   
       return output.replace('.', ',')
-    },
-  
-    show () {
-      this.$modal.show('error-message');
-    },
-  
-    hide () {
-      this.$modal.hide('error-message');
-    },
-
-    showAddButton() {
-      if (!this.outOfStock && !this.cashInfos.finished && !this.cashInfos.finishedCharge) {
-        return this.addButton = true
-      }
-
-      return this.addButton = false
     }
   }
 }
@@ -181,22 +150,6 @@ export default {
   &-actions {
     width: 100%;
     text-align: center;
-  }
-}
-
-.Modal {
-  display: block;
-  background-color: rgba(255, 0, 0, 0.479);
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &-title { 
-    margin: 0;
-    font-size: 30px;
-    color: white;
-    text-transform: uppercase;
   }
 }
 </style>

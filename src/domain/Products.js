@@ -6,7 +6,7 @@ export default class Products {
       name: "Coca Cola",
       code: "1",
       stock: 10,
-      src: "./assets/antartic.jpg",
+      src: "//placehold.it/300x150/19274C/ffffff",
       price: 300
     },
     {
@@ -14,56 +14,56 @@ export default class Products {
       name: "Coca Cola Zero",
       code: "90413",
       stock: 4,
-      src: "./assets/antartic.jpg",
-      price: 3.00
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 300
     },
     {
       id: 3,
       name: "Guaraná Antarctica",
       code: "24352",
       stock: 6,
-      src: "./assets/antartic.jpg",
-      price: 2.50
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 250
     },
     {
       id: 4,
       name: "Guarana Antartica Zero",
       code: "2332",
       stock: 8,
-      src: "./assets/antartic.jpg",
-      price: 2.25
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 225
     },
     {
       id: 5,
       name: "Fanta Laranja",
       code: "44212",
       stock: 3,
-      src: "./assets/antartic.jpg",
-      price: 2.40
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 240
     },
     {
       id: 6,
       name: "Fanta Uva",
       code: "03432",
       stock: 5,
-      src: "./assets/antartic.jpg",
-      price: 2.75
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 275
     },
     {
       id: 7,
       name: "Guarana Jesus",
       code: "12984",
       stock: 7,
-      src: "./assets/antartic.jpg",
-      price: 2.00
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 200
     },
     {
       id: 8,
       name: "Pepsi",
       code: "94334",
       stock: 4,
-      src: "./assets/antartic.jpg",
-      price: 3.00
+      src: "//placehold.it/300x150/19274C/ffffff",
+      price: 300
     }
   ]
 

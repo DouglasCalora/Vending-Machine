@@ -62,7 +62,9 @@ export default {
   }
 
   &-form {
-    width: calc(50% - 20px);
+    width: calc(30% - 20px);
+    display: flex;
+    justify-content: space-around;
   }
 
   &-button {

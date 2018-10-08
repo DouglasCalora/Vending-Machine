@@ -89,7 +89,7 @@ export default {
     transition: border 500ms;
 
     &:focus {
-      border-color: $primary-color;;
+      border-color: $primary-color; 
     }
   }
 
